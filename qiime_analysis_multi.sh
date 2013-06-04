@@ -26,14 +26,14 @@ notify-send "Chimera sequences removal completed"
 echo
 
 #Copute core biome
-#echo "Coputing the core biome, aka the OTUs common to all samples. Change the  --min_fraction_for_core parameters if needed"
-#compute_core_microbiome.py -i otus/otu_table_cc.biom -o otus/otu_table_core --min_fraction_for_core 1
-#echo
+echo "Coputing the core biome, aka the OTUs common to all samples. Change the  --min_fraction_for_core parameters if needed"
+compute_core_microbiome.py -i otus/otu_table_cc.biom -o otus/otu_table_core --min_fraction_for_core 1
+echo
 
 #Print library stats
 echo "Printing library statistics before and after chimera removal in the library_summary file. Following analyses will use only chemra removed files"
-per_library_stats.py -i otus/otu_table.biom > library_summary.txt
-per_library_stats.py -i otus/otu_table_cc.biom > library_summary_cc.txt
+print_biom_table_summary.py -i otus/otu_table.biom > library_summary.txt
+print_biom_table_summary.py -i otus/otu_table_cc.biom > library_summary_cc.txt
 echo
 
 #Making tree
