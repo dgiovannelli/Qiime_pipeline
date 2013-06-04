@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>QiimeReport</title>
+<meta charset="utf-8">
+<meta name="description" content="QiimeReport">
+<meta name="author" content="Donato Giovannelli">
+<meta name="version" content="v0.2-20130507">
+
+<style>
+body{ margin:0; background:#333; font:16px/24px Helvetica, Helvetica Neue, Arial, sans-serif; }
+#wrapper{ width:960px; margin:0 5%; background:#fff; padding:20px; }
+header {border-bottom:2px solid rgb(190,190,180);}
+h4 { color:#666; padding:0; margin:0;}
+table { margin:0 auto; background-color:#ddd; }
+img { display:block; margin:0 auto; padding:10px; }
+a { color:#0000FF; text-decoration:none;}
+a:visited { color:#0000FF;} 
+a:hover, a:focus { color:#0d82df; text-decoration:underline; }
+header a { color:#666; text-decoration:underline; }
+header a:visited { color:#666; text-decoration:underline; }
+header a:hover, a:focus { color:#0d82df; }
+footer { font-size: 0.85em; border-top:2px solid rgb(190,190,180); }
+footer li { display:inline; list-style: none; list-style-image: none; margin: 0; padding: 10px;}
+</style>
+
+<body>
+<div id="wrapper">
+<header>
+<h2>Welcome to <em>QiimeReport</em>!</h2>
+<h4>by D. Giovannelli @ <a href="http://marine.rutgers.edu/deep-seamicrobiology/" target="_blank">Deep-Sea Microbiology Lab - Rutgers University</a></h4>
+<h5>version 0.2</h5>
+</header>
+
+<section>
+<p>QiimeReport is an automatic html report that easily and automatically shows the results from the Qiime pipeline for the analysis of 16S rRNA pyrotag libraries.</p>
+</section>
+<section>
+<ul>
+<li><a href="library_summary_cc.txt" target="_blank">Summary of the library analysis results.</a> Contains total number of sequences, sequences for samples and total identifies OTUs at 97% cut-off.</li>
+<li><a href="output_plots/bar_charts.html" target="_blank">Bar plot summary of the results.</a> Contains the results of the diversity analysis at the Phylum, Class, Order, Family and Genus.</li>
+<li><a href="alpha_rarefaction/alpha_rarefaction_plots/rarefaction_plots.html" target="_blank">Rarefaction plots for the libraries.</a> Contains the curve for the observed number of species (OTUs), Chao1 and Shannon diversity indexes. Select in the menu the metric to be visualized and in the category "SampleID".</li>
+<li><a href="otus/otu_heatmap/otu_table_cc.html" target="_blank">Heatmap of the results.</a> They can be visualized as OTUs number or taxonomic consensus level.</li>
+<li><a href="otus/rep_set/seq_rep_set_cc.fasta" target="_blank">Representative fasta sequences of each OTU.</a> It can be used to run further analyses (e.g. blastn or EzTaxon) on specific OTUs identified in the previous heatmap plot as abundante and/or of interest. it can be used to confirm Qiime taxonomic assignment confidence and % similarity of specific groups to reference sequences.</li>
+<li><a href="otus/rep_set_cc.tre" target="_blank">Diversity tree of the samples combined in Newick format obtained with the Qiime fasttree algoritm.</a> Right click on the link (or apple+click) and save the file. Can be opened with FigTree, geneious or other tree drawing programs.</li>
+</section>
+
+<footer>
+	<p>Usefull links:
+	<ul>
+	  <li><a href="http://www.ubuntu.com/" target="_blank">Ubuntu</a></li>
+	  <li><a href="http://qiime.org/" target="_blank">Qiime</a></li>
+	  <li><a href="http://topiaryexplorer.sourceforge.net/" target="_blank">Topiary Explorer</a></li>
+	  <li><a href="http://www.r-project.org/" target="_blank">R-Software</a></li>
+	  <li><a href="http://inkscape.org/" target="_blank">Inkscape</a></li>
+	  <li><a href="http://www.hiveplot.net/" target="_blank">Hives plot</a></li>
+	  <li><a href="http://circos.ca/" target="_blank">Circos</a></li>
+	  <li><a href="http://en.wikipedia.org/wiki/HTML5" target="_blank">HTML 5</a></li>
+	  <li><a href="http://d3js.org/" target="_blank">D3.js</a></li>
+	  <li><a href="http://colorbrewer2.org/" target="_blank">Color brewer</a></li>	
+	</ul></p>
+</footer>
+</div>
+</body>
+</html>

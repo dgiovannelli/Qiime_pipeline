@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Milos White Mats - Results</title>
+
+	<meta name="description" content="Milos White Mats - Results">
+	<meta name="author" content="Donato Giovannelli">
+	<meta name="version" content="v0.1-20130507">
+
+<style>
+body{ margin:0; background:#333; font:16px/24px Helvetica, Helvetica Neue, Arial, sans-serif; }
+#wrapper{ width:960px; margin:0 5%; background:#fff; padding:20px; }
+header {border-bottom:2px solid rgb(190,190,180);}
+h4 { color:#666; }
+table { margin:0 auto; background-color:#ddd; }
+img { display:block; margin:0 auto; padding:10px; }
+a { color:#0000FF; text-decoration:none;}
+a:visited { color:#0000FF;} 
+a:hover, a:focus { color:#0d82df; text-decoration:underline; }
+header a { color:#666; text-decoration:underline; }
+header a:visited { color:#666; text-decoration:underline; }
+header a:hover, a:focus { color:#0d82df; }
+footer { font-size: 0.85em; border-top:2px solid rgb(190,190,180); }
+footer li { display:inline; list-style: none; list-style-image: none; margin: 0; padding: 20px;}
+</style>
+
+</head>
+<body>
+<div id="wrapper">
+
+<article>
+	<header>
+	<h1>Milos White Mats 16S rRNA pyrotag from cDNA - Results</h1>
+	<h4>by D. Giovannelli @ <a href="http://marine.rutgers.edu/deep-seamicrobiology/" target="_blank">Deep-Sea Microbiology Lab - Rutgers University</a></h4>
+<h5>version 0.2</h5>
+	</header>
+
+	<section>
+	<h3>General info / THIS IS A SECTION OF THE REPORT</h3>
+	<p>The pyrotag was perfomed on the XXXX... by XXX... INSERT HERE INFO ON THE ANALYSIS, EXTRACTION AMPLIFICATION, SEQUENCING, PRIMER BIOINFORMATICS AND METADATA ON THE SAMPLES... </p>
+
+	<p>This is a list 
+	<ul><li>Item ONE</li><li>Item TWO</li></ul>
+	USE LIST TO ITEMIZE SAMPLES/CONDITIONS</p>
+	</section>
+
+	<section>
+	<h3>Results / THIS IS ANOTHER SECTION</h3>
+	<p>DESCRIBE YOUR GENERAL LIBRARY STATISTICS. NEXT IS A TABLE TO REPORT GENERAL FEATURE. REPORT Chao1 at ca. 3,000 sequences for comparison with other projects.</p>
+
+<table border="1" bordercolor="333" width="50%" cellpadding="1" cellspacing="1">
+	<tr>
+		<td></td>
+		<td>Total</td>
+		<td>Sample1</td>
+		<td>Sample2</td>
+	</tr>	
+	<tr>
+		<td>Number of Sequences</td>
+		<td>X</td><td>X</td><td>X</td>
+	</tr>
+	<tr>
+		<td>Number of unique OTUs</td>
+		<td>X</td><td>X</td><td>X</td>
+	</tr>
+	<tr>
+		<td>Shannon diversity (H')</td>
+		<td>X</td><td>X</td><td>X</td>
+	</tr>
+	<tr>
+		<td>Chao1 diversity estimator</td>
+		<td>X</td><td>X (@number of seq)</td><td>x (@number of seq)</td>
+	</tr>
+</table>
+</section>
+
+	<section>
+	<h3>Another Section</h3>
+<p>Bla bla bla <em>Species</em>.</p>
+
+<p>Bla bla bla <em>Species</em> (<a href="http://www.ncbi.nlm.nih.gov/nuccore/ACCESSION" target_="_blank">Accesion number link</a>).</p>
+
+<p><img src="Sample_Tax-level.png" height="500" width="750" alt="DIVERSITY BARPLOT"/></p>
+
+<p>The obtained diversity tree are the following, colored according to consensus diversity obtained from the Qiime analysis. Left tree shows the full diversity. Right tree is collapsed at 80% consensus branch composition.</p>
+
+<img src="../tree/tree_SAMPLE.png" height="500" width="900" alt="Tree of the sample printed with Topiary Explorer"/>
+
+<p>You can modify the tree using the Topiary Explorer java webstart (topiaryexplorer.jnlp) present in the main directory of this project and opening the tree_TC.tep file. See <a href="http://topiaryexplorer.sourceforge.net/user_guide/quickstart.html" target="_blank">Topiary User's Guide</a> for how to.</p>
+	</section>
+
+	<footer>
+	<p>This report and associated analyses were made using the following open-source software:
+	<ul>
+	  <li><a href="http://www.ubuntu.com/" target="_blank">Ubuntu</a></li>
+	  <li><a href="http://qiime.org/" target="_blank">Qiime</a></li>
+	  <li><a href="http://topiaryexplorer.sourceforge.net/" target="_blank">Topiary Explorer</a></li>
+	  <li><a href="http://www.r-project.org/" target="_blank">R-Software</a></li>
+	  <li><a href="http://inkscape.org/" target="_blank">Inkscape</a></li>
+	  <li><a href="http://www.hiveplot.net/" target="_blank">Hives plot</a></li>
+	  <li><a href="http://circos.ca/" target="_blank">Circos</a></li>
+	  <li><a href="http://en.wikipedia.org/wiki/HTML5" target="_blank">HTML 5</a></li>	
+	</ul></p>
+	</footer>
+</article>
+
+</div>
+</body>
+</html>
