@@ -27,7 +27,7 @@ echo
 
 #Copute core biome
 echo "Coputing the core biome, aka the OTUs common to all samples. Change the  --min_fraction_for_core parameters if needed"
-compute_core_microbiome.py -i otus/otu_table_cc.biom -o otus/otu_table_core --min_fraction_for_core 1
+compute_core_microbiome.py -i otus/otu_table_cc.biom -o otus/otu_table_core
 echo
 
 #Print library stats
@@ -80,7 +80,7 @@ beta_diversity_through_plots.py -i otus/otu_table_cc.biom -m map.txt -o betadiv/
 echo
 echo
 
-echo "Default QIIME 1.6 pipeline for multiple sample analysis is complete. Pipeline written by Donato Giovannelli - 2012. Please refer to readme.txt file for detail on code, parameters and output results."
+echo "Default QIIME 1.7 pipeline for multiple sample analysis is complete. Pipeline written by Donato Giovannelli - 2012. Please refer to readme.txt file for detail on code, parameters and output results."
 notify-send "QIIME analysis pipeline completed"
 
 zenity --title "QIIME PIPELINE" --info --text="QIIME analysis completed!"
