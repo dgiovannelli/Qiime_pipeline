@@ -38,7 +38,7 @@ echo
 
 #Making tree
 echo "Building a tree from the chimera removed alignment. Tree bulding method default is fasttree and newick format file. The file can be visualized and edited using FigTree"
-make_phylogeny.py -i otus/pynast_aligned_seqs/seq_rep_set_aligned_cc.fasta -o otus/rep_set_cc.tre
+make_phylogeny.py -i -n 0 otus/pynast_aligned_seqs/seq_rep_set_aligned_cc.fasta -o otus/rep_set_cc.tre
 echo
 
 #Create files to be used with Topiary Explorer
