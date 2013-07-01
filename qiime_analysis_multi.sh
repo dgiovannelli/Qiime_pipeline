@@ -78,6 +78,12 @@ echo
 echo "Compute beta diversity between the sample"
 beta_diversity_through_plots.py -i otus/otu_table_cc.biom -m map.txt -o betadiv/ -t otus/rep_set_cc.tre -e 1000 
 echo
+
+#Compute core microbiome taxonomy and make plot
+echo "Compute core microbiome diversity and taxonomy"
+summarize_taxa.py -i otus/otu_table_core/core_table_100.biom -o ./tax/core/
+plot_taxa_summary.py -i tax/core/core_table_100_L2.txt,tax/core/core_table_100_L3.txt,tax/core/core_table_100_L4.txt,tax/core/core_table_100_L5.txt,tax/core/core_table_100_L6.txt -c bar -o output_plots/core/
+echo
 echo
 
 echo "Default QIIME 1.7 pipeline for multiple sample analysis is complete. Pipeline written by Donato Giovannelli - 2012. Please refer to readme.txt file for detail on code, parameters and output results."
