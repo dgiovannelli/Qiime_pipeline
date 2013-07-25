@@ -38,7 +38,7 @@ echo
 
 #Making tree
 echo "Building a tree from the chimera removed alignment. Tree bulding method default is fasttree and newick format file. The file can be visualized and edited using FigTree"
-make_phylogeny.py -i -n 0 otus/pynast_aligned_seqs/seq_rep_set_aligned_cc.fasta -o otus/rep_set_cc.tre
+make_phylogeny.py -i otus/pynast_aligned_seqs/seq_rep_set_aligned_cc.fasta -o otus/rep_set_cc.tre
 echo
 
 #Create files to be used with Topiary Explorer
@@ -53,7 +53,7 @@ echo
 
 #Create a Heat map of the samples
 echo "Create OTUs Heatmap from the _cc OTUs table"
-make_otu_heatmap_html.py -i otus/otu_table_cc.biom -o otus/otu_heatmap/
+make_otu_heatmap_html.py -i otus/otu_table_cc.biom -o otus/otu_heatmap/ -n 0
 echo
 
 #Make Taxa Summary Charts
