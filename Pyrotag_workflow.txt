@@ -6,7 +6,7 @@ This file describe the analysis of 16S rRNA sequences used
 
 
 Assumption:
-- You successfully installed Qiime 1.5 - http://qiime.org/
+- You successfully installed Qiime 1.8 - http://qiime.org/
 - You downloaded and installed Topiary Explorer - http://topiaryexplorer.sourceforge.net/user_guide/install.html
 - You have a text editor program capable of handling different file format such as Gedit - http://projects.gnome.org/gedit/
 - You are working on a linux machine (or other unix systems) and are familiar with command line interface

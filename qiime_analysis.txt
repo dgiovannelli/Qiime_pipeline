@@ -1,8 +1,8 @@
 QIIME SINGLE SAMPLE ANALYSIS
-Donato Giovannelli - 2012
+Donato Giovannelli - 2012 - update 2014
 /-------------------------------------------------------------------------/
 README file for the single sample (demultiplexed) anlysis pipeline of
- 16S PyroTag sequences with QIIME 1.5. The QIIME script and this readme were written by
+ 16S PyroTag sequences with QIIME 1.8. The QIIME script and this readme were written by
 Donato Giovannelli at the Deep Sea Microbiology Lab, IMCS, Rutgers University, NJ, USA.
 /-------------------------------------------------------------------------/
 

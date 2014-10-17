@@ -1,7 +1,11 @@
 #!/bin/bash
-# QIIME 1.7 routine for handling single sample file sequence already demultisplexed and splitted
+# QIIME 1.8 routine for handling single sample file sequence already demultisplexed and splitted
 clear
-echo "Starting the QIIME 1.7 sample analysis pipeline. Refer to the file readme.txt locate in this folder for details. Version v0.1-20130507"
+echo "Starting the QIIME 1.8 sample analysis pipeline. Refer to the file readme.txt locate in this folder for details. Version v0.2-20140808"
+
+# print the qiime config file for future reference on the analysis
+print_qiime_config.py -tb > qiime_config_print.txt
+date > analysis_date.txt
 
 # Pre-processing
 echo "Check mapping file"
@@ -22,6 +26,7 @@ echo "Remove the chimera from the OTUs selected sequences and OTU table creating
 filter_fasta.py -f otus/rep_set/seq_rep_set.fasta -o otus/rep_set/seq_rep_set_cc.fasta -s chimeric_otu.txt -n
 filter_fasta.py -f otus/pynast_aligned_seqs/seq_rep_set_aligned_pfiltered.fasta -o otus/pynast_aligned_seqs/seq_rep_set_aligned_cc.fasta -s chimeric_otu.txt -n
 filter_otus_from_otu_table.py -i otus/otu_table.biom -e chimeric_otu.txt -o otus/otu_table_cc.biom
+echo "Chimera sequences removal completed"
 notify-send "Chimera sequences removal completed"
 echo
 
@@ -30,10 +35,16 @@ echo "Coputing the core biome, aka the OTUs common to all samples. Change the  -
 compute_core_microbiome.py -i otus/otu_table_cc.biom -o otus/otu_table_core
 echo
 
+# Create .biom file for Phinch.org visualization
+echo "Creating .biom table of dataset with embedded taxonomy and metadata for visualization in phinch.org"
+make_otu_table.py -i otus/uclust_picked_otus/seq_otus.txt -o otu_cc_phinch.biom -t otus/uclust_assigned_taxonomy/seq_rep_set_tax_assignments.txt 
+biom add-metadata -i otu_cc_phinch.biom -o otu_phinch_final.biom -m map.txt
+echo
+
 #Print library stats
-echo "Printing library statistics before and after chimera removal in the library_summary file. Following analyses will use only chemra removed files"
-print_biom_table_summary.py -i otus/otu_table.biom > library_summary.txt
-print_biom_table_summary.py -i otus/otu_table_cc.biom > library_summary_cc.txt
+echo "Printing library statistics before and after chimera removal in the library_summary file. Following analyses will use only chimera removed files"
+biom summarize-table -i otus/otu_table.biom -o library_summary.txt
+biom summarize-table -i otus/otu_table_cc.biom -o library_summary_cc.txt
 echo
 
 #Making tree
@@ -44,11 +55,11 @@ echo
 #Create files to be used with Topiary Explorer
 echo "Creating the files set into /tree/ folder to be used with Topiary Explorer for tree visualization"
 mkdir tree
-convert_biom.py -i otus/otu_table_cc.biom -o otus/otu_table_te.txt -b --header_key taxonomy --output_metadata_id "Consensus Lineage" 
+biom convert -i otus/otu_table_cc.biom -o otus/otu_table_te.txt -b --header-key taxonomy --output-metadata-id "Consensus Lineage" 
 cp otus/rep_set_cc.tre tree/rep_set_cc_te.tre
 cp otus/otu_table_te.txt tree/otu_table_te.txt
 cp map.txt tree/map_te.txt
-cp otus/rdp_assigned_taxonomy/seq_rep_set_tax_assignments.txt tree/tip_data.txt
+cp otus/uclust_assigned_taxonomy/seq_rep_set_tax_assignments.txt tree/tip_data.txt
 echo
 
 #Create a Heat map of the samples
@@ -76,7 +87,8 @@ echo
 
 #Compute beta diversity
 echo "Compute beta diversity between the sample"
-beta_diversity_through_plots.py -i otus/otu_table_cc.biom -m map.txt -o betadiv/ -t otus/rep_set_cc.tre -e 1000 
+beta_diversity_through_plots.py -i otus/otu_table_cc.biom -m map.txt -o betadiv/ -t otus/rep_set_cc.tre -e 1000
+nmds.py -i betadiv/weighted_unifrac_dm.txt -o betadiv/nmds.txt -d 2
 echo
 
 #Compute core microbiome taxonomy and make plot
