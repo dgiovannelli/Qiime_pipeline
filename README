@@ -1,4 +1,0 @@
-Qiime_pipeline
-version 0.2
-
-An easy to use script for basic 16S rRNA analysis of diversity and html report page. The script works on linux native install of Qiime or VirtualBox install.
