@@ -16,7 +16,7 @@ read -p "Are there any error in the mapping file? [y/n]" answer
 if [[ $answer = y ]] ; then
 	echo "Check the results/check_map/ folder and correct the map.txt file. Rerun the qiime script"
 	[[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but doesn't exit interactive shell
-else	
+else
 	echo "No error found in the mapping file. Proceeding with the qiime pipeline"
 	echo
 	echo "Pick open reference OTUs at 97% cut-off using the default GreenGene database"
@@ -31,7 +31,7 @@ else
 	echo "Chimera sequences removal completed"
 	echo
 	echo "Assign taxonomy using rdp naive bayesian classifier"
-	parallel_assign_taxonomy_rdp.py -i results/rep_set_cc.fna -o results/greengene_assigned_taxonomy/ -c 0.80	# assign taxonomy with rdp against greengenes	
+	parallel_assign_taxonomy_rdp.py -i results/rep_set_cc.fna -o results/greengene_assigned_taxonomy/ -c 0.80	# assign taxonomy with rdp against greengenes
 	make_otu_table.py -i results/otus/final_otu_map_mc2.txt -o results/otu_cc_greengenes.biom -t results/greengene_assigned_taxonomy/rep_set_cc_tax_assignments.txt
 	biom convert -i results/otu_cc_greengenes.biom -o results/otu_cc_greengenes.txt --to-tsv --header-key taxonomy --output-metadata-id "Consensus Lineage"
 
@@ -41,13 +41,13 @@ else
 	compute_core_microbiome.py --min_fraction_for_core 1 -i results/otu_cc_greengenes.biom -o results/core_microbiome 	# Computing the core biome, aka the OTUs common to all samples. Change the  --min_fraction_for_core parameters if needed [0,1]"
 
 	echo
-	echo "Computing alpha and beta diversity. Rarefaction is set to 10,000 sequences. Change the parameters in the file accordingly to the minimum number of sequences present in your library."	
+	echo "Computing alpha and beta diversity. Rarefaction is set to 5,000 sequences. Change the parameters in the file accordingly to the minimum number of sequences present in your library."
 	summarize_taxa_through_plots.py -o results/taxa_summary -i results/otu_cc_greengenes.biom -m map.txt		# Making basic summary plots
 	make_otu_network.py -m map.txt -i results/otu_cc_greengenes.biom -o results/network	# Compute and create OTUs network. It can be visualized with Cytoscape or parsed to be used in Circos or HivePlot
-	single_rarefaction.py -i results/otu_cc_greengenes.biom -o results/otu_cc_greengenes_rarefied.biom -d 10000
+	single_rarefaction.py -i results/otu_cc_greengenes.biom -o results/otu_cc_greengenes_rarefied.biom -d 5000
 	alpha_diversity.py -i results/otu_cc_greengenes_rarefied.biom -o results/alpha_rarefaction --metrics PD_whole_tree,chao1,observed_species,shannon -t results/rep_set_cc.tre 	# Compute alpha diversity as Chao1 and Shannon indexes
 
-	beta_diversity_through_plots.py -i results/otu_cc_greengenes.biom -m map.txt -o results/betadiv -t otus/rep_set_cc.tre -e 10000 -a 8 --jobs_to_start 8  	# Compute beta diversity between the sample
+	beta_diversity_through_plots.py -i results/otu_cc_greengenes.biom -m map.txt -o results/betadiv -t otus/rep_set_cc.tre -e 5000 -a 8 --jobs_to_start 8  	# Compute beta diversity between the sample
 	nmds.py -i betadiv/weighted_unifrac_otu_cc_greengenes_rarefied.txt -o results/betadiv/nmds.txt -d 2
 
 	zip -r basic_qiime_results.zip results/analysis_info.txt results/rep_set_cc.fna results/rep_set_aligned_cc.fasta results/rep_set_cc.tre results/otu_cc_greengenes.biom results/otu_cc_greengenes.txt results/library_summary_before_cc.txt results/library_summary_after_cc.txt results/core_microbiome results/taxa_summary results/network results/alpha_rarefaction results/betadiv	# Compress the results folder ready for transfer to the local computer
