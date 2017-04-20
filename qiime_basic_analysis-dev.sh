@@ -44,15 +44,16 @@ else
 
 	echo
 	seq_rarefact=$(grep "Min" results/library_summary_after_cc.txt | cut -d":" -f2)
-	echo "Computing alpha and beta diversity. Rarefaction is set to ${seq_rarefact} sequences based on the Min number of sequences in your library_summary_after_cc.txt file."
-  echo "Diversity rarefaction parameters for alpha and beta diversity set to ${seq_rarefact} sequences" >> results/analysis_info.txt
+	echo "Computing alpha and beta diversity. Rarefaction is set to ${seq_rarefact%.*} sequences based on the Min number of sequences in your library_summary_after_cc.txt file."
+  echo "Diversity rarefaction parameters for alpha and beta diversity set to ${seq_rarefact%.*} sequences" >> results/analysis_info.txt
 	summarize_taxa_through_plots.py -o results/taxa_summary -i results/otu_cc_greengenes.biom -m map.txt		# Making basic summary plots
 	make_otu_network.py -m map.txt -i results/otu_cc_greengenes.biom -o results/network	# Compute and create OTUs network. It can be visualized with Cytoscape or parsed to be used in Circos or HivePlot
-	single_rarefaction.py -i results/otu_cc_greengenes.biom -o results/otu_cc_greengenes_rarefied.biom -d ${seq_rarefact}
+	single_rarefaction.py -i results/otu_cc_greengenes.biom -o results/otu_cc_greengenes_rarefied.biom -d ${seq_rarefact%.*}
 	alpha_diversity.py -i results/otu_cc_greengenes_rarefied.biom -o results/alpha_rarefaction --metrics PD_whole_tree,chao1,observed_species,shannon -t results/rep_set_cc.tre 	# Compute alpha diversity as Chao1 and Shannon indexes
 
-	beta_diversity_through_plots.py -i results/otu_cc_greengenes.biom -m map.txt -o results/betadiv -t otus/rep_set_cc.tre -e ${seq_rarefact} -a 8 --jobs_to_start 8  	# Compute beta diversity between the sample
-	nmds.py -i betadiv/weighted_unifrac_otu_cc_greengenes_rarefied.txt -o results/betadiv/nmds.txt -d 2
+	beta_diversity_through_plots.py -i results/otu_cc_greengenes.biom -m map.txt -o results/betadiv -t results/rep_set_cc.tre -e ${seq_rarefact%.*} -a --jobs_to_start 8 --ignore_missing_samples		# Compute beta diversity between the sample
+	nmds.py -i results/betadiv/weighted_unifrac_dm.txt -o results/betadiv/nmds.txt -d 2
+	nmds.py -i results/betadiv/weighted_unifrac_dm.txt -o results/betadiv/nmds_3D.txt -d 3
 
 	zip -r basic_qiime_results.zip results/analysis_info.txt results/rep_set_cc.fna results/rep_set_aligned_cc.fasta results/rep_set_cc.tre results/otu_cc_greengenes.biom results/otu_cc_greengenes.txt results/library_summary_before_cc.txt results/library_summary_after_cc.txt results/core_microbiome results/taxa_summary results/network results/alpha_rarefaction results/betadiv	# Compress the results folder ready for transfer to the local computer
 
