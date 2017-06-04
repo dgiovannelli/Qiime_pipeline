@@ -40,7 +40,7 @@ else
 	biom summarize-table -i results/otus/otu_table_mc2_w_tax.biom -o results/library_summary_before_cc.txt 	# Print library stats on failed OTU call and before and after chimera removal
 	biom summarize-table -i results/otus/otu_table_mc2_w_tax_cc.biom -o results/library_summary_after_cc.txt
 
-	compute_core_microbiome.py --min_fraction_for_core 1 -i results/otu_cc_greengenes.biom -o results/core_microbiome 	# Computing the core biome, aka the OTUs common to all samples. Change the  --min_fraction_for_core parameters if needed [0,1]"
+	compute_core_microbiome.py -i results/otu_cc_greengenes.biom -o results/core_microbiome 	# Computing the core biome, aka the OTUs common to all samples. Change the  --min_fraction_for_core parameters if needed [0,1]"
 
 	echo
 	seq_rarefact=$(grep "Min" results/library_summary_after_cc.txt | cut -d":" -f2)
